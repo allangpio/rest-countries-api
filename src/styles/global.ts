@@ -7,15 +7,27 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: 0;
   }
+
   body {
-    background: #312e38;
-    color: #fff;
+    background: ${props => props.theme.colors.background};
+    color: ${props => props.theme.colors.text};
     -webkit-font-smoothing: antialiased;
   }
+
   body, input {
     font: 16px 'Nunito', 'sans-serif';
+    font-weight: 300;
   }
-  h1, h2, h3, h4, h5, h6, strong {
+
+  h1, h2 {
+    font-weight: 800;
+  }
+
+  h3, strong {
     font-weight: 600;
+  }
+
+  input {
+    color: ${props => props.theme.colors.input}
   }
 `;
