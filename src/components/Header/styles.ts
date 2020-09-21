@@ -5,6 +5,9 @@ export const Container = styled.header`
   height: 4rem;
   padding: 1rem 4rem;
 
+  background: ${props => props.theme.colors.elements};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
   display: flex;
   justify-content: space-between;
 

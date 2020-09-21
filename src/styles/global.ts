@@ -15,7 +15,7 @@ export default createGlobalStyle`
   }
 
   body, input {
-    font: 16px 'Nunito', 'sans-serif';
+    font: 14px 'Nunito', 'sans-serif';
     font-weight: 300;
   }
 
