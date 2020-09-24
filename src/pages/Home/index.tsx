@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../services/api'
 
+import { useCountry } from '../../hooks/countries';
 import Search from '../../components/Search';
 import Card from '../../components/Card';
 
 import { Container, CardsContainer } from './styles';
 
-interface CountrieProps {
-  name: string;
-  flag: string;
-  region: string;
-  population: number;
-  capital: string;
-  numericCode: string;
-}
+// interface CountrieProps {
+//   name: string;
+//   flag: string;
+//   region: string;
+//   population: number;
+//   capital: string;
+//   numericCode: string;
+// }
 
 const Home: React.FC = () => {
-  const [countries, setCountries] = useState<CountrieProps[]>({} as CountrieProps[]);
   const [loading, setLoading] = useState(false)
-
+  const { filteredCountries, getAllCountries } = useCountry();
   useEffect(() => {
     (async function getCountries() {
-      const response = await api.get('/all');
-      setCountries(response.data);
+      getAllCountries();
       setLoading(true);
     })();
   }, [])
@@ -31,7 +29,7 @@ const Home: React.FC = () => {
     <Container>
       <Search />
       <CardsContainer>
-        {!loading ? <h1>Loading</h1> : (countries.map(countrie => (
+        {!loading ? <h1>Loading</h1> : (filteredCountries.map(countrie => (
           <Card key={countrie.numericCode} name={countrie.name} flag={countrie.flag} region={countrie.region} population={countrie.population} capital={countrie.capital} />
         )))}
       </CardsContainer>
