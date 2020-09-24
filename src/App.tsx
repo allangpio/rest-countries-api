@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { CountryProvider } from './hooks/countries';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import usePersistedState from './utils/userPesistedState';
 
@@ -20,7 +21,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header toggleTheme={toggleTheme} />
-      <Home />
+      <CountryProvider>
+        <Home />
+      </CountryProvider>
       <GlobalStyle />
     </ThemeProvider>
   );
