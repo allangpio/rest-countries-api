@@ -8,12 +8,14 @@ interface CountryState {
   population: number;
   capital: string;
   numericCode: string;
+  alpha3Code: string;
 }
 
 interface CountryContextData {
   countries: CountryState[];
   filteredCountries: CountryState[];
   getAllCountries(): Promise<void>;
+  getByName(name: string): Promise<CountryState>;
   filterCountries(name: string): void;
   filterByRegion(region: string): void;
 }
@@ -30,9 +32,14 @@ export const CountryProvider: React.FC = ({ children }) => {
     setFilteredCountries(response.data);
   }, []);
 
+  const getByName = useCallback(async (name): Promise<CountryState> => {
+    const response = await api.get(`/alpha/${name}`);
+    return response.data;
+  }, []);
+
   const filterCountries = useCallback((name: string) => {
     const searchedCountries = countries.filter(country => country.name.toLowerCase().includes(name.toLowerCase()))
-    setFilteredCountries(searchedCountries);
+    setFilteredCountries(Array.from(searchedCountries));
   }, [countries]);
 
   const filterByRegion = useCallback((region: string) => {
@@ -40,8 +47,10 @@ export const CountryProvider: React.FC = ({ children }) => {
     region === "none" ? setFilteredCountries(countries) : setFilteredCountries(searchedCountries);
   }, [countries])
 
+
+
   return (
-    <CountryContext.Provider value={{ countries: countries, filteredCountries, getAllCountries, filterCountries, filterByRegion }}>
+    <CountryContext.Provider value={{ countries: countries, filteredCountries, getAllCountries, getByName, filterCountries, filterByRegion }}>
       {children}
     </CountryContext.Provider>
   );
