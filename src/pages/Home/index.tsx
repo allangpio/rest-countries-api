@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useCountry } from '../../hooks/countries';
 import Search from '../../components/Search';
@@ -6,14 +7,6 @@ import Card from '../../components/Card';
 
 import { Container, CardsContainer } from './styles';
 
-// interface CountrieProps {
-//   name: string;
-//   flag: string;
-//   region: string;
-//   population: number;
-//   capital: string;
-//   numericCode: string;
-// }
 
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(false)
@@ -30,10 +23,12 @@ const Home: React.FC = () => {
       <Search />
       <CardsContainer>
         {!loading ? <h1>Loading</h1> : (filteredCountries.map(countrie => (
-          <Card key={countrie.numericCode} name={countrie.name} flag={countrie.flag} region={countrie.region} population={countrie.population} capital={countrie.capital} />
+          <Link to={`detail/${countrie.alpha3Code}`} >
+            <Card key={countrie.numericCode} name={countrie.name} flag={countrie.flag} region={countrie.region} population={countrie.population} capital={countrie.capital} />
+          </Link>
         )))}
       </CardsContainer>
-    </Container>
+    </Container >
   );
 }
 
