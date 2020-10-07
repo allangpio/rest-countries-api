@@ -2,13 +2,14 @@ import React, { useCallback } from 'react';
 import { CountryProvider } from './hooks/countries';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import usePersistedState from './utils/userPesistedState';
+import { BrowserRouter } from 'react-router-dom';
 
 import light from './styles/themes/light';
 import dark from './styles/themes/dark';
 
 import GlobalStyle from './styles/global';
+import Routes from './routes';
 import Header from './components/Header';
-import Home from './pages/Home';
 
 
 const App = () => {
@@ -22,7 +23,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Header toggleTheme={toggleTheme} />
       <CountryProvider>
-        <Home />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </CountryProvider>
       <GlobalStyle />
     </ThemeProvider>
