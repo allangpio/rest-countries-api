@@ -11,11 +11,30 @@ interface CountryState {
   alpha3Code: string;
 }
 
+interface Currencies {
+  name: string;
+}
+interface DetailedCountryState {
+  name: string;
+  flag: string;
+  region: string;
+  population: number;
+  capital: string;
+  numericCode: string;
+  alpha3Code: string;
+  nativeName: string;
+  subregion: string;
+  topLevelDomain: string[];
+  currencies: { name: string }[];
+  languages: { name: string }[];
+  borders: string[];
+}
+
 interface CountryContextData {
   countries: CountryState[];
   filteredCountries: CountryState[];
   getAllCountries(): Promise<void>;
-  getByName(name: string): Promise<CountryState>;
+  getByName(name: string): Promise<DetailedCountryState>;
   filterCountries(name: string): void;
   filterByRegion(region: string): void;
 }
@@ -32,7 +51,7 @@ export const CountryProvider: React.FC = ({ children }) => {
     setFilteredCountries(response.data);
   }, []);
 
-  const getByName = useCallback(async (name): Promise<CountryState> => {
+  const getByName = useCallback(async (name): Promise<DetailedCountryState> => {
     const response = await api.get(`/alpha/${name}`);
     return response.data;
   }, []);
