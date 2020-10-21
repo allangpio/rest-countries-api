@@ -12,13 +12,15 @@ export const Container = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
+    color:  ${props => props.theme.colors.text};
+
     width: 10rem;
     padding: 1rem 1rem;
   }
 `;
 
 export const TextInputContainer = styled.div`
-  background: ${props => props.theme.colors.elements};
+  background: ${props => props.theme.colors.background};
   padding: 1rem 2rem;
 
   display: flex;
