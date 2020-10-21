@@ -18,6 +18,7 @@ export const Container = styled.div`
  }
  img {
    display: block;
+   height: 100%;
    width: 100%;
    object-fit: cover;
 
@@ -26,9 +27,13 @@ export const Container = styled.div`
 
 export const Info = styled.div`
 padding: 0.5rem 1rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
   strong {
     font-size: 16px;
     display: block;
+    margin-bottom: .75rem;
   }
 
   span {
