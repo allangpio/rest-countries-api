@@ -17,7 +17,9 @@ interface CountrieProps {
 const Card: React.FC<CountrieProps> = ({ name, flag, region, population, capital }: CountrieProps) => {
   return (
     <Container>
-      <img src={flag} alt={`${name} flag`} />
+      <div>
+        <img src={flag} alt={`${name} flag`} />
+      </div>
       <Info>
         <strong>{name}</strong> <br />
         <p><span>Population: </span> {population}</p>
