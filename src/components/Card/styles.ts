@@ -10,9 +10,16 @@ export const Container = styled.div`
  background: ${props => props.theme.colors.elements};
 
  margin-top: 1rem;
- img {
-   width: 100%;
+
+ div {
+  width: 100%;
    height: 166px;
+   overflow: hidden;
+ }
+ img {
+   display: block;
+   width: 100%;
+   object-fit: cover;
 
  }
 `;
