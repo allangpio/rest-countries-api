@@ -12,6 +12,13 @@ interface CountrieProps {
   population: number;
   capital: string;
   numericCode: string;
+  alpha3Code: string;
+  nativeName: string;
+  subregion: string;
+  topLevelDomain: string[];
+  currencies: { name: string }[];
+  languages: { name: string }[];
+  borders: string[];
 }
 
 interface MatchParams {
@@ -38,7 +45,7 @@ const Details: React.FC<Props> = ({ match }) => {
 
   return (
     <Container>
-      <Link to='/'>Back</Link>
+      <Link to='/'>&larr; Back</Link>
       {loading ? (<h1>Loading</h1>) : (
         <CountrieContainer>
           <Flag>
@@ -48,21 +55,26 @@ const Details: React.FC<Props> = ({ match }) => {
             <h3>{countrie.name}</h3>
             <Detail>
               <LeftDetail>
-                <p><strong>Native Name:</strong></p>
-                <p><strong>Population:</strong></p>
-                <p><strong>Region:</strong></p>
-                <p><strong>Sub Region:</strong></p>
-                <p><strong>Capital:</strong></p>
+                <p><strong>Native Name:</strong> {countrie.nativeName} </p>
+                <p><strong>Population:</strong> {countrie.population}</p>
+                <p><strong>Region:</strong> {countrie.region}</p>
+                <p><strong>Sub Region:</strong> {countrie.subregion} </p>
+                <p><strong>Capital:</strong> {countrie.capital}</p>
               </LeftDetail>
 
               <RightDetail>
-                <p><strong>Top Level Domain:</strong></p>
-                <p><strong>Currencies:</strong></p>
-                <p><strong>Languages:</strong></p>
+                <p><strong>Top Level Domain:</strong>  {countrie.topLevelDomain && countrie.topLevelDomain.map(item => item).slice().join(', ')}  </p>
+                <p><strong>Currencies:</strong> {countrie.currencies && countrie.currencies.map(currencie => currencie.name).slice().join(', ')} </p>
+                <p><strong>Languages:</strong> {countrie.languages && countrie.languages.map(language => language.name).slice().join(', ')}  </p>
               </RightDetail>
-
-              <p><strong>Border Countries:</strong></p>
             </Detail>
+
+            <p><strong>Border Countries:</strong> {countrie.borders && countrie.borders.map(border => (
+              <Link to={`/detail/${border}`} key={border}>
+                {border}
+              </Link>
+            ))} </p>
+
           </InfoContainer>
         </CountrieContainer>
       )}
